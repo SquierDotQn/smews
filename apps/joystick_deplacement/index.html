@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Led Switch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="jquery.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+	
+	<script>
+		window.setInterval(joystick, 10);
+		function joystick(){
+			var chaine = "joystick";
+			ajaxGetJoystick(chaine);
+		}
+		function ajaxGetJoystick(chaine){
+			$.ajax({
+			url: chaine,
+			type: "GET",
+			dataType: "html",
+			success: 	function(message){
+							//document.getElementById('Resultat').innerHTML = message;
+							var div = document.getElementById('joystick-table').getElementsByTagName('div');
+							for(var i=0; i<div.length; i++){
+								div[i].className = "";
+							}
+							if(message == 'BAS'){
+								document.getElementById('bas').className = "selected";
+							}
+							else if(message == 'GAUCHE'){
+								document.getElementById('gauche').className = "selected";
+							}
+							else if(message == 'DROITE'){
+								document.getElementById('droite').className = "selected";
+							}
+							else if(message == 'HAUT'){
+								document.getElementById('haut').className = "selected";
+							}
+							else if(message == 'GAUCHEHAUT'){
+								document.getElementById('haut-gauche').className = "selected";
+							}
+							else if(message == 'HAUTDROITE'){
+								document.getElementById('haut-droite').className = "selected";
+							}
+							else if(message == 'BASGAUCHE'){
+								document.getElementById('bas-gauche').className = "selected";
+							}
+							else if(message == 'BASDROITE'){
+								document.getElementById('bas-droite').className = "selected";
+							}
+							else if(message == 'CENTER'){
+								document.getElementById('centre').className = "center-selected";
+							}
+							else{
+								document.getElementById('centre').className = "selected";
+							}
+						}
+			});
+		}
+		
+		function ajaxGet(url) {
+			var xhr;
+			var xhrTimer;
+			try{ xhr = new XMLHttpRequest(); }
+			catch(e){ xhr = new ActiveXObject('Microsoft.XMLHTTP'); }
+			xhr.onreadystatechange = function(){
+				chart.sampleCallBack(xhr,xhrTimer);
+			};
+			xhr.open("GET", url, true);
+			xhrTimer = setTimeout(function() { xhr.abort(); this.inFlight = 0;}, 1000);
+			xhr.send(null);
+		}
+	</script>
+	<body style="margin:auto; width:80%;">
+		<h1 class="text-primary container">JOYSTICK COMET</h1>
+		<br />
+		<br />
+		<div id="message"></div>
+		<p class="text-muted strong">Joystick :</p>
+		<table id="joystick-table">
+			<tr>
+				<td><div id="haut-gauche" ></div></td>
+				<td><div id="haut" ></div></td>
+				<td><div id="haut-droite" ></div></td>
+			</tr>
+			<tr>
+				<td><div id="gauche" ></div></td>
+				<td><div id="centre" class="selected"></div></td>
+				<td><div id="droite" ></div></td>
+			</tr>
+			<tr>
+				<td><div id="bas-gauche" ></div></td>
+				<td><div id="bas" ></div></td>
+				<td><div id="bas-droite" ></div></td>
+			</tr>
+		</table>
+		<br />
+		<br />
+		<br />
+		<br />
+		<p class="text-right text-muted"><strong>Powered by Vincent Vidal & Jules VANNESTE.</strong></p>
+	</body>
+</html>
