@@ -47,7 +47,39 @@ void destroyCell(int x , int y) {
 */
 
 #include <stdio.h>
+
+/* led matrix */
+#define INIT_SERIAL do { rflpc_uart_init_ex(RFLPC_UART2, 52, 0, 1, 2); } while(0) /* 9600 bauds configuration */
+#define SEND_SERIAL(c) rflpc_uart_putchar(RFLPC_UART2, ((c)))
  
+
+void shift_tab(const char* tab, const char* tab_result, uint8_t size){
+	int x, y;
+	for(x = 0; x < size; x++){
+		for(y = 0; y < size; y++){
+			tab[x][y] = tab_result[y][x];
+		} 
+	}
+}
+
+// format : "ffffff" > blanc | "000000" > noir 
+uint8_t str_to_color(const char *color)
+{
+   uint8_t r, g, b;
+   r = ((htoi(color[0])*16 + htoi(color[1])) >> 5) & 0x7;
+   g = ((htoi(color[2])*16 + htoi(color[3])) >> 5) & 0x7;
+   b = ((htoi(color[4])*16 + htoi(color[5])) >> 6) & 0x3;
+   return (r << 5) | (g << 2) | b;
+}
+
+int strlen(const char *str)
+{
+    const char *s = str;
+    while (*s++);
+    return s-str;
+}
+
+/* game of life */
 /* some additional header needed to use the function evolve provided
    previously, or just copy/paste the given code here */
  
@@ -75,14 +107,15 @@ char temp_field[FIELD_SIZE*FIELD_SIZE];
 #define FAKE 3
 int potard = FAKE;
 
+
+
+
 /* set the cell i,j as alive */
 #define SCELL(I,J) field[FIELD_SIZE*(I)+(J)] = 1
 int count_alive(const char *field, int i, int j, int size){
    int x, y, a=0;
-   for(x=i-1; x <= (i+1) ; x++)
-   {
-      for(y=j-1; y <= (j+1) ; y++)
-      {
+   for(x=i-1; x <= (i+1) ; x++){
+      for(y=j-1; y <= (j+1) ; y++){
          if ( (x==i) && (y==j) ) continue;
          if ( (y<size) && (x<size) && (x>=0) && (y>=0) ){
               a += CELL(x,y);
@@ -94,14 +127,11 @@ int count_alive(const char *field, int i, int j, int size){
  
 void evolve(const char *field, char *t, int size){
    int i, j, alive, cs;
-   for(i=0; i < size; i++)
-   {
-      for(j=0; j < size; j++)
-      {
+   for(i=0; i < size; i++){
+      for(j=0; j < size; j++){
          alive = count_alive(field, i, j, size);
          cs = CELL(i,j);
-         if ( cs )
-         {
+         if ( cs ){
             if ( (alive > 3) || ( alive < 2 ) )
                 DEAD(i,j);
             else
@@ -114,7 +144,7 @@ void evolve(const char *field, char *t, int size){
          }
       }
    }
-   delay(potard);
+   delay(potard*1000);// potard*1000 ms // Pour pouvoir faire une simple boucle "while(true)"
 }
  
 void dump_field(const char *f, int size){
@@ -124,6 +154,12 @@ void dump_field(const char *f, int size){
       printf("%c", f[i] ? 'X' : '.');
    }
    printf("\n");
+}
+
+void led_dump_field(const char *f, int size){
+   char f_dump[size*size];
+   shift_tab(f,f_dump, size);
+   // TODO
 }
  
  
