@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<script type="text/javascript">
+
+	    function guirApply() {
+			var pat = document.getElementById("patern_Selector").value;
+			var col1 = document.getElementById("color1_Selector").value;
+			var col2 = document.getElementById("color2_Selector").value;
+			var tour = document.getElementById("tour_Selector").value;
+			var url = "/ledStrip_arg?patern="+pat+"&couleur1="+col1+"&couleur2="+col2+"&tour="+tour;
+
+			var xhr = new XMLHttpRequest();
+
+			xhr.open("GET", url, true);
+			xhr.send(null);
+        }
+    	</script>
+	<head>
+		<title> MBED control Led Strip </title>
+	</head>
+	
+	<body>
+	</body>
+	<form action="app_led" method=post>
+		Selection du partern :
+		<SELECT id="patern_Selector">
+			<OPTION value="0">Clear</OPTION>
+			<OPTION value="1">Unie</OPTION>
+			<OPTION value="2">Defilement</OPTION>
+			<OPTION value="3">Empiler</OPTION>
+			<OPTION value="4">Aller Retour</OPTION>
+		</SELECT>
+		<br />
+		Selection de la couleur principale :
+		<SELECT id="color1_Selector">
+				<OPTION value="0">Eteint</OPTION>
+				<OPTION value="1">Bleu</OPTION>
+				<OPTION value="2">Rouge</OPTION>
+				<OPTION value="3">Vert</OPTION>
+		</SELECT>
+		<br />
+		Selection de la couleur secondaire : 
+		<SELECT id="color2_Selector">
+				<OPTION value="0">Eteint</OPTION>
+				<OPTION value="1">Bleu</OPTION>
+				<OPTION value="2">Rouge</OPTION>
+				<OPTION value="3">Vert</OPTION>
+		</SELECT>
+		<br />
+		Nombre de tour : 
+		<SELECT id="tour_Selector">
+				<OPTION value="0">0</OPTION>
+				<OPTION value="1">1</OPTION>
+				<OPTION value="2">2</OPTION>
+				<OPTION value="3">3</OPTION>
+				<OPTION value="4">4</OPTION>
+				<OPTION value="5">5</OPTION>
+				<OPTION value="6">6</OPTION>
+				<OPTION value="7">7</OPTION>
+				<OPTION value="8">8</OPTION>
+				<OPTION value="9">9</OPTION>
+				<OPTION value="10">10</OPTION>
+		</SELECT>
+		<br />
+		<INPUT type="button" value="Envoyer" onclick="guirApply();">
+
+	</form>
+</html>
+

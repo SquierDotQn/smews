@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<script type="text/javascript">
+
+	    function _apply() {
+			var url = "/led_args";
+
+			var xhr = new XMLHttpRequest();
+
+			xhr.open("GET", url, true);
+			xhr.send(null);
+        }
+    	</script>
+	<head>
+		<title> MBED control Led Strip </title>
+	</head>
+	
+	<body>
+	</body>
+	<form action="app_led" method=post>
+		Lancer le jeu de la vie
+		<INPUT type="button" value="Lancer" onclick="_apply();">
+
+	</form>
+</html>
+

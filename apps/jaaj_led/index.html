@@ -1,0 +1,20 @@
+<script>
+	function allumeLed(noled){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "led?noled="+noled, true);
+		xhr.send(null);
+		if(document.getElementById(noled).style.backgroundColor=="green"){
+			document.getElementById(noled).style.backgroundColor=="red";
+		}else{
+			document.getElementById(noled).style.backgroundColor=="green";
+		}
+	}
+</script>
+<html>
+	<body>
+		<div id="1" style="position:absolute; top:560pxc;left:120px;background-color:green;width:45px;height:20px;" onclick="allumeLed('1');"></div>
+		<div id="2" style="position:absolute; top:560pxc;left:172px;background-color:green;width:45px;height:20px;" onclick="allumeLed('2');"></div>
+		<div id="3" style="position:absolute; top:560pxc;left:224px;background-color:green;width:45px;height:20px;" onclick="allumeLed('3');"></div>
+		<div id="4" style="position:absolute; top:560pxc;left:276px;background-color:green;width:45px;height:20px;" onclick="allumeLed('4');"></div>
+	</body>
+</html>
