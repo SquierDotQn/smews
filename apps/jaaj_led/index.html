@@ -1,12 +1,13 @@
 <script>
 	function allumeLed(noled){
-		var xhr = new XMLHttpRequest();
+		/*var xhr = new XMLHttpRequest();
 		xhr.open("GET", "led?noled="+noled, true);
-		xhr.send(null);
-		if(document.getElementById(noled).style.backgroundColor=="green"){
-			document.getElementById(noled).style.backgroundColor=="red";
+		xhr.send(null);*/
+        alert("ca marche no"+noled);
+		if(document.getElementById(noled).style.background=="green"){
+			document.getElementById(noled).style.background="red";
 		}else{
-			document.getElementById(noled).style.backgroundColor=="green";
+			document.getElementById(noled).style.background="green";
 		}
 	}
 </script>

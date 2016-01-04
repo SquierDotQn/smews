@@ -1,41 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-	<script type="text/javascript">
-        function allumeLed(noled){
-            if(document.getElementById(noled).style.backgroundColor=="red"){
-                document.getElementById(noled).style.backgroundColor=="black";
-            }else{
-                document.getElementById(noled).style.backgroundColor=="red";
+<script>
+    function allumeLed(noled){
+        if(document.getElementById(noled).style.backgroundColor=="red"){
+            document.getElementById(noled).style.backgroundColor="black";
+        }else{
+            document.getElementById(noled).style.backgroundColor="red";
+        }
+    }
+
+    function launch() {
+        var nbgens = 20;
+        var field = getField();
+        var url = "/led_args?nbgens="+nbgens+"&field="+field;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", url, true);
+        xhr.send(null);
+    }
+
+    function getField() {
+        var field = "";
+        for(i=1; i<= 64; i++){
+            if(document.getElementById(i).style.backgroundColor=="black"){
+                field += '0';
+            }
+            if(document.getElementById(i).style.backgroundColor=="red"){
+                field += '1';
             }
         }
-        
-	    function launch() {
-            var nbgens = 20;
-            var field = getField();
-			var url = "/led_args?nbgens="+nbgens+"&field="+field;
+        return field;
+    }
 
-			var xhr = new XMLHttpRequest();
-
-			xhr.open("GET", url, true);
-			xhr.send(null);
-        }
-        
-        function getField() {
-            var field = new Array(64);
-            for(i=1; i<= 64; i++)
-                if(document.getElementById(i).style.backgroundColor=="black"){
-                    field[i-1] = '0';
-                }
-                if(document.getElementById(i).style.backgroundColor=="red"){
-                    field[i-1] = '1';
-                }
-            }
-            return field;
-        }
-        
-    </script>
+</script>
+<html>
 	<head>
-		<title> MBED control Led Strip </title>
+		<title> Jeu de la vie sur matrice de leds </title>
 	</head>
 	
 	<body>
@@ -43,93 +42,93 @@
 	<form action="led" method=post>
         <table>
             <tr>
-                <td><div id="1" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('1');"></div></td>
-                <td><div id="2" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('2');"></div></td>
-                <td><div id="3" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('3');"></div></td>
-                <td><div id="4" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('4');"></div></td>
-                <td><div id="5" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('5');"></div></td>
-                <td><div id="6" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('6');"></div></td>
-                <td><div id="7" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('7');"></div></td>
-                <td><div id="8" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('8');"></div></td>
+                <td id="1" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('1');"></td>
+                <td id="2" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('2');"></td>
+                <td id="3" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('3');"></td>
+                <td id="4" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('4');"></td>
+                <td id="5" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('5');"></td>
+                <td id="6" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('6');"></td>
+                <td id="7" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('7');"></td>
+                <td id="8" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('8');"></td>
             </tr>
             
             <tr>
-                <td><div id="9" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('9');"></div></td>
-                <td><div id="10" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('10');"></div></td>
-                <td><div id="11" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('11');"></div></td>
-                <td><div id="12" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('12');"></div></td>
-                <td><div id="13" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('13');"></div></td>
-                <td><div id="14" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('14');"></div></td>
-                <td><div id="15" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('15');"></div></td>
-                <td><div id="16" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('16');"></div></td>
+                <td id="9" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('9');"></td>
+                <td id="10" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('10');"></td>
+                <td id="11" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('11');"></td>
+                <td id="12" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('12');"></td>
+                <td id="13" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('13');"></td>
+                <td id="14" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('14');"></td>
+                <td id="15" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('15');"></td>
+                <td id="16" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('16');"></td>
             </tr>
             
             <tr>
-                <td><div id="17" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('17');"></div></td>
-                <td><div id="18" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('18');"></div></td>
-                <td><div id="19" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('19');"></div></td>
-                <td><div id="20" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('20');"></div></td>
-                <td><div id="21" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('21');"></div></td>
-                <td><div id="22" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('22');"></div></td>
-                <td><div id="23" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('23');"></div></td>
-                <td><div id="24" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('24');"></div></td>
+                <td id="17" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('17');"></td>
+                <td id="18" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('18');"></td>
+                <td id="19" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('19');"></td>
+                <td id="20" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('20');"></td>
+                <td id="21" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('21');"></td>
+                <td id="22" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('22');"></td>
+                <td id="23" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('23');"></td>
+                <td id="24" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('24');"></td>
             </tr>
             
             <tr>
-                <td><div id="25" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('25');"></div></td>
-                <td><div id="26" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('26');"></div></td>
-                <td><div id="27" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('27');"></div></td>
-                <td><div id="28" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('28');"></div></td>
-                <td><div id="29" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('29');"></div></td>
-                <td><div id="30" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('30');"></div></td>
-                <td><div id="31" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('31');"></div></td>
-                <td><div id="32" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('32');"></div></td>
+                <td id="25" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('25');"></td>
+                <td id="26" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('26');"></td>
+                <td id="27" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('27');"></td>
+                <td id="28" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('28');"></td>
+                <td id="29" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('29');"></td>
+                <td id="30" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('30');"></td>
+                <td id="31" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('31');"></td>
+                <td id="32" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('32');"></td>
             </tr>
             <tr>
-                <td><div id="33" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('33');"></div></td>
-                <td><div id="34" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('34');"></div></td>
-                <td><div id="35" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('35');"></div></td>
-                <td><div id="36" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('36');"></div></td>
-                <td><div id="37" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('37');"></div></td>
-                <td><div id="38" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('38');"></div></td>
-                <td><div id="39" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('39');"></div></td>
-                <td><div id="40" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('40');"></div></td>
+                <td id="33" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('33');"></td>
+                <td id="34" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('34');"></td>
+                <td id="35" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('35');"></td>
+                <td id="36" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('36');"></td>
+                <td id="37" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('37');"></td>
+                <td id="38" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('38');"></td>
+                <td id="39" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('39');"></td>
+                <td id="40" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('40');"></td>
             </tr>            
             <tr>
-                <td><div id="41" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('41');"></div></td>
-                <td><div id="42" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('42');"></div></td>
-                <td><div id="43" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('43');"></div></td>
-                <td><div id="44" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('44');"></div></td>
-                <td><div id="45" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('45');"></div></td>
-                <td><div id="46" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('46');"></div></td>
-                <td><div id="47" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('47');"></div></td>
-                <td><div id="48" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('48');"></div></td>
+                <td id="41" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('41');"></td>
+                <td id="42" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('42');"></td>
+                <td id="43" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('43');"></td>
+                <td id="44" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('44');"></td>
+                <td id="45" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('45');"></td>
+                <td id="46" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('46');"></td>
+                <td id="47" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('47');"></td>
+                <td id="48" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('48');"></td>
             </tr>
             
             <tr>
-                <td><div id="49" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('49');"></div></td>
-                <td><div id="50" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('50');"></div></td>
-                <td><div id="51" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('51');"></div></td>
-                <td><div id="52" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('52');"></div></td>
-                <td><div id="53" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('53');"></div></td>
-                <td><div id="54" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('54');"></div></td>
-                <td><div id="55" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('55');"></div></td>
-                <td><div id="56" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('56');"></div></td>
+                <td id="49" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('49');"></td>
+                <td id="50" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('50');"></td>
+                <td id="51" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('51');"></td>
+                <td id="52" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('52');"></td>
+                <td id="53" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('53');"></td>
+                <td id="54" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('54');"></td>
+                <td id="55" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('55');"></td>
+                <td id="56" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('56');"></td>
             </tr>
             
             <tr>
-                <td><div id="57" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('57');"></div></td>
-                <td><div id="58" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('58');"></div></td>
-                <td><div id="59" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('59');"></div></td>
-                <td><div id="60" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('60');"></div></td>
-                <td><div id="61" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('61');"></div></td>
-                <td><div id="62" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('62');"></div></td>
-                <td><div id="63" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('63');"></div></td>
-                <td><div id="64" style="background-color:red;width:45px;height:20px;" onclick="allumeLed('64');"></div></td>
+                <td id="57" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('57');"></td>
+                <td id="58" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('58');"></td>
+                <td id="59" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('59');"></td>
+                <td id="60" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('60');"></td>
+                <td id="61" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('61');"></td>
+                <td id="62" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('62');"></td>
+                <td id="63" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('63');"></td>
+                <td id="64" style="background-color:red;width:20px;height:20px;" onclick="allumeLed('64');"></td>
             </tr>
         
         </table>
-		Lancer le jeu de la vie
+        Lancer le jeu de la vie sur <!--<input type="text" name="gens"> TODO-->20 generations. </br>
 		<INPUT type="button" value="Lancer" onclick="launch();">
 
 	</form>
