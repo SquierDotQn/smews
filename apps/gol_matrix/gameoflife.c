@@ -13,7 +13,7 @@ void delay(int time){
    int c = 1, d = 1;
  
    for ( c = 1 ; c <= time ; c++ )
-       for ( d = 1 ; d <= 960000 ; d++ )
+       for ( d = 1 ; d <= 3000000 ; d++ )
        {__asm("nop");}
 }
 
@@ -53,11 +53,10 @@ void evolve(const char *field, char *t, int size){
       }
    }
    
-   //delay(potard*1000);// potard*1000 ms // Pour pouvoir faire une simple boucle "while(true)"
 }
 
 void game(int nb_gens, char in_field[]){
-	/*char t_field[] = {
+	char t_field[] = {
  	     0,1,0,0,0,0,0,0,
  	     0,0,1,0,0,0,0,0,
  	     1,1,1,0,0,0,0,0,
@@ -66,19 +65,35 @@ void game(int nb_gens, char in_field[]){
  	     0,0,0,0,0,0,0,0,
  	     0,0,0,0,0,0,0,0,
  	     0,0,0,0,0,0,0,0,
-	};*/
+	};
 	int i;
-
+	int garde = 0;
+	int double_garde = 0;
+	char old_field[FIELD_SIZE*FIELD_SIZE];
 	for(i=0; i<FIELD_SIZE*FIELD_SIZE; i++){	
-		field[i] = in_field[i];
+		//field[i] = in_field[i];
+		// Exemple de test :
+		field[i] = t_field[i];
 	}
 	for(i=0; i<nb_gens; i++){
 		clear_led();
 		unie();
-		delay(potard);
+		delay(potard); // TODO : vraie gestion du potard
 		evolve(field, temp_field, FIELD_SIZE);
-		for(i=0; i<FIELD_SIZE*FIELD_SIZE; i++){	
+		garde = 0;
+		double_garde = 0;
+		for(i=0; i<FIELD_SIZE*FIELD_SIZE; i++){
+			if(field[i]!=temp_field[i]){
+				garde++;
+			}
+			old_field[i] = field[i];
 			field[i] = temp_field[i];
+			if(field[i]!=old_field[i] && i>0){
+				double_garde++;
+			}	
+		}
+		if(garde == 0 || double_garde == 0){
+			break;
 		}
 	}
 }
