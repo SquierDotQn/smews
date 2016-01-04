@@ -1,6 +1,10 @@
 /*
 <generator>
         <handlers doGet="launch_game"/>
+	   <args>
+            <arg name="nbgens" type="uint8" />
+            <arg name="field" type="char[]" />
+	   </args>
 </generator>
 */
 
@@ -8,13 +12,13 @@
 #include "gameoflife.h"
 
 static char launch_game(struct args_t *args) {
-    	INIT_WAIT;
-    	SPI_INIT;
-	
-	//On clear les LED
-	clear_led();
-		
-	//uint16_t coul = get_coul((int) args->couleur1);
-	game();
+    INIT_WAIT;
+    SPI_INIT;
+
+    //On clear les LED
+    clear_led();
+
+    game(args->nbgens, args->ffield);
+
 	return 0;
 }
