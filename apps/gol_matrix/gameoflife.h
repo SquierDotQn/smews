@@ -4,4 +4,4 @@
 
 extern char field[];
 void evolve(const char *field, char *t, int size);
-void game(int nb_gens, char[] in_field);
+void game(int nb_gens, char in_field[]);

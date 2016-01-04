@@ -56,7 +56,7 @@ void evolve(const char *field, char *t, int size){
    //delay(potard*1000);// potard*1000 ms // Pour pouvoir faire une simple boucle "while(true)"
 }
 
-void game(int nb_gens, char[] in_field){
+void game(int nb_gens, char in_field[]){
 	/*char t_field[] = {
  	     0,1,0,0,0,0,0,0,
  	     0,0,1,0,0,0,0,0,
