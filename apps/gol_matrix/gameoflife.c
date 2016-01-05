@@ -13,7 +13,7 @@ void delay(int time){
    int c = 1, d = 1;
  
    for ( c = 1 ; c <= time ; c++ )
-       for ( d = 1 ; d <= 3000000 ; d++ )
+       for ( d = 1 ; d <= 960000 ; d++ )
        {__asm("nop");}
 }
 
